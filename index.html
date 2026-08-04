@@ -68,10 +68,46 @@
     max-width:1120px;margin:0 auto;padding:14px 28px;
     display:flex;align-items:center;justify-content:space-between;
   }
-  .nav-brand{
-    font-family:'Space Grotesk',sans-serif;font-weight:700;color:var(--cream);
-    font-size:1.05rem;letter-spacing:0.02em;
+  /* Logo inside the navbar, top-left, clickable */
+  .nav-logo-link{
+    position:relative;
+    display:flex;align-items:center;
+    cursor:pointer;flex-shrink:0;
   }
+  .nav-logo{
+    height:46px;width:auto;
+    filter:drop-shadow(0 3px 8px rgba(0,0,0,0.4));
+    transition:transform .25s ease, filter .25s ease;
+  }
+  .nav-logo-ring{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:38px;height:38px;border-radius:50%;
+    border:1.5px solid var(--gold-light);
+    opacity:0;animation:corner-pulse 2.6s ease-out infinite;
+    pointer-events:none;
+  }
+  .nav-logo-hint{
+    position:absolute;top:calc(100% + 10px);left:0;
+    background:var(--gold);color:var(--ink);font-weight:700;font-size:0.68rem;
+    padding:4px 10px;border-radius:100px;white-space:nowrap;
+    opacity:0;transform:translateY(-4px);
+    transition:opacity .2s ease, transform .2s ease;
+    box-shadow:0 4px 10px rgba(0,0,0,0.3);
+    pointer-events:none;
+  }
+  .nav-logo-link:hover .nav-logo{transform:scale(1.08);filter:drop-shadow(0 5px 12px rgba(0,0,0,0.5));}
+  .nav-logo-link:hover .nav-logo-hint{opacity:1;transform:translateY(0);}
+  @keyframes corner-pulse{
+    0%{opacity:0.55;transform:translate(-50%,-50%) scale(0.75);}
+    80%{opacity:0;transform:translate(-50%,-50%) scale(1.7);}
+    100%{opacity:0;transform:translate(-50%,-50%) scale(1.7);}
+  }
+  @media (max-width:900px){
+    .nav-logo{height:38px;}
+    .nav-logo-ring{width:32px;height:32px;}
+    .nav-logo-hint{font-size:0.62rem;padding:3px 8px;}
+  }
+
   .nav-links{display:flex;align-items:center;gap:8px;}
   .nav-item{position:relative;}
   .nav-trigger{
@@ -127,45 +163,6 @@
     .nav-cta{margin:14px 0 0;text-align:center;}
   }
 
-  /* Fixed corner logo — bigger, and clearly clickable */
-  .corner-logo-link{
-    position:fixed;top:8px;right:20px;z-index:950;
-    display:flex;flex-direction:column;align-items:center;gap:2px;
-    cursor:pointer;
-  }
-  .corner-logo{
-    width:118px;height:auto;
-    filter:drop-shadow(0 6px 16px rgba(0,0,0,0.45));
-    transition:transform .25s ease, filter .25s ease;
-  }
-  .corner-logo-ring{
-    position:absolute;top:14px;left:50%;transform:translateX(-50%);
-    width:74px;height:74px;border-radius:50%;
-    border:1.5px solid var(--gold-light);
-    opacity:0;animation:corner-pulse 2.6s ease-out infinite;
-    pointer-events:none;
-  }
-  @keyframes corner-pulse{
-    0%{opacity:0.55;transform:translateX(-50%) scale(0.75);}
-    80%{opacity:0;transform:translateX(-50%) scale(1.5);}
-    100%{opacity:0;transform:translateX(-50%) scale(1.5);}
-  }
-  .corner-logo-hint{
-    background:var(--gold);color:var(--ink);font-weight:700;font-size:0.68rem;
-    padding:4px 10px;border-radius:100px;white-space:nowrap;
-    opacity:0;transform:translateY(-4px);
-    transition:opacity .2s ease, transform .2s ease;
-    box-shadow:0 4px 10px rgba(0,0,0,0.3);
-  }
-  .corner-logo-link:hover .corner-logo{transform:scale(1.06);filter:drop-shadow(0 8px 20px rgba(0,0,0,0.55));}
-  .corner-logo-link:hover .corner-logo-hint{opacity:1;transform:translateY(0);}
-  @media (max-width:900px){
-    .corner-logo-link{top:4px;right:10px;}
-    .corner-logo{width:76px;}
-    .corner-logo-ring{width:48px;height:48px;top:10px;}
-    .corner-logo-hint{font-size:0.6rem;padding:3px 8px;}
-  }
-
   .eyebrow{
     color:var(--gold-light);
     font-size:0.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
@@ -196,7 +193,7 @@
   .hero{
     background:radial-gradient(120% 100% at 15% 0%, var(--petrol) 0%, var(--navy) 55%, var(--ink) 100%);
     color:var(--cream);
-    padding:150px 0 90px;
+    padding:120px 0 90px;
     position:relative;
     overflow:hidden;
   }
@@ -364,7 +361,11 @@
 <!-- ===== NAVBAR ===== -->
 <nav class="navbar">
   <div class="navbar-inner">
-    <span class="nav-brand">CARREIRA SEGUROS</span>
+    <a class="nav-logo-link" href="#sobre" aria-label="Ir para Sobre a Carreira Seguros">
+      <span class="nav-logo-ring"></span>
+      <img class="nav-logo" src="logo.png" alt="Carreira Seguros">
+      <span class="nav-logo-hint">Saiba mais ↓</span>
+    </a>
     <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">☰</button>
     <div class="nav-links" id="navLinks">
       <div class="nav-item">
@@ -425,13 +426,6 @@
     </div>
   </div>
 </nav>
-
-<!-- Fixed corner logo — stays visible while scrolling -->
-<a class="corner-logo-link" href="#sobre" aria-label="Ir para Sobre a Carreira Seguros">
-  <span class="corner-logo-ring"></span>
-  <img class="corner-logo" src="logo.png" alt="Carreira Seguros">
-  <span class="corner-logo-hint">Saiba mais ↓</span>
-</a>
 
 <!-- ===== HERO ===== -->
 <header class="hero">
