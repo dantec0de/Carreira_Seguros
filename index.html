@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carreira Seguros — Corretora de seguros em Guarulhos, SP</title>
+<meta name="description" content="Comparamos as principais seguradoras parceiras para achar a cobertura ideal pro seu negócio — com suporte completo antes e depois da contratação.">
+<!-- Pixel de rastreamento: nenhum pixel ativo no momento (conforme briefing). Espaço reservado para inserção futura. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#10102D;
+    --petrol:#171837;
+    --gold:#C29958;
+    --gold-light:#E5C98E;
+    --gold-dark:#8F724D;
+    --cream:#EDE6D6;
+    --cream-dim:#DDD3BC;
+    --ink:#0B0A20;
+    --missing-bg:#2E2416;
+    --missing-border:#C29958;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Manrope',sans-serif;
+    background:var(--cream);
+    color:var(--navy);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{
+    font-family:'Space Grotesk',sans-serif;
+    letter-spacing:-0.02em;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 28px;}
+  section{position:relative;}
+
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  .missing{
+    display:inline-block;
+    background:var(--missing-bg);
+    color:var(--cream);
+    border:1.5px dashed var(--missing-border);
+    border-radius:8px;
+    padding:10px 14px;
+    font-size:0.85rem;
+    font-weight:600;
+    font-family:'Manrope',sans-serif;
+  }
+  .missing.block{display:block;width:100%;text-align:center;padding:18px;}
+  .missing::before{content:"⚠ FALTA: ";color:var(--gold-light);}
+
+  /* NAVBAR */
+  .navbar{
+    position:fixed;top:0;left:0;right:0;z-index:900;
+    background:rgba(11,10,32,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(194,153,88,0.18);
+  }
+  .navbar-inner{
+    max-width:1120px;margin:0 auto;padding:14px 28px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  /* Logo inside the navbar, top-left, clickable */
+  .nav-logo-link{
+    position:relative;
+    display:flex;align-items:center;
+    cursor:pointer;flex-shrink:0;
+  }
+  .nav-logo{
+    height:46px;width:auto;
+    filter:drop-shadow(0 3px 8px rgba(0,0,0,0.4));
+    transition:transform .25s ease, filter .25s ease;
+  }
+  .nav-logo-ring{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:38px;height:38px;border-radius:50%;
+    border:1.5px solid var(--gold-light);
+    opacity:0;animation:corner-pulse 2.6s ease-out infinite;
+    pointer-events:none;
+  }
+  .nav-logo-hint{
+    position:absolute;top:calc(100% + 10px);left:0;
+    background:var(--gold);color:var(--ink);font-weight:700;font-size:0.68rem;
+    padding:4px 10px;border-radius:100px;white-space:nowrap;
+    opacity:0;transform:translateY(-4px);
+    transition:opacity .2s ease, transform .2s ease;
+    box-shadow:0 4px 10px rgba(0,0,0,0.3);
+    pointer-events:none;
+  }
+  .nav-logo-link:hover .nav-logo{transform:scale(1.08);filter:drop-shadow(0 5px 12px rgba(0,0,0,0.5));}
+  .nav-logo-link:hover .nav-logo-hint{opacity:1;transform:translateY(0);}
+  @keyframes corner-pulse{
+    0%{opacity:0.55;transform:translate(-50%,-50%) scale(0.75);}
+    80%{opacity:0;transform:translate(-50%,-50%) scale(1.7);}
+    100%{opacity:0;transform:translate(-50%,-50%) scale(1.7);}
+  }
+  @media (max-width:900px){
+    .nav-logo{height:38px;}
+    .nav-logo-ring{width:32px;height:32px;}
+    .nav-logo-hint{font-size:0.62rem;padding:3px 8px;}
+  }
+
+  .nav-links{display:flex;align-items:center;gap:8px;}
+  .nav-item{position:relative;}
+  .nav-trigger{
+    display:flex;align-items:center;gap:5px;
+    color:var(--cream-dim);font-size:0.92rem;font-weight:600;
+    padding:10px 12px;border-radius:8px;
+    transition:color .2s ease, background .2s ease;
+    cursor:pointer;
+  }
+  .nav-trigger .caret{font-size:0.6rem;color:var(--gold);transition:transform .2s ease;}
+  .nav-item:hover .nav-trigger, .nav-item.open .nav-trigger{color:var(--gold-light);background:rgba(194,153,88,0.08);}
+  .nav-item:hover .caret, .nav-item.open .caret{transform:rotate(180deg);}
+  .nav-dropdown{
+    position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(-6px);
+    background:var(--ink);border:1px solid rgba(194,153,88,0.25);border-radius:14px;
+    padding:18px 20px;width:270px;
+    opacity:0;pointer-events:none;transition:opacity .18s ease, transform .18s ease;
+    box-shadow:0 20px 40px rgba(0,0,0,0.45);
+    z-index:920;
+  }
+  .nav-item:hover .nav-dropdown, .nav-item.open .nav-dropdown{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0);}
+  .nav-dropdown h4{color:var(--gold-light);font-family:'Space Grotesk',sans-serif;font-size:0.82rem;margin-bottom:10px;letter-spacing:0.02em;}
+  .nav-dropdown p{color:var(--cream-dim);font-size:0.85rem;line-height:1.55;}
+  .nav-dropdown ul{list-style:none;padding:0;margin:0;}
+  .nav-dropdown li{color:var(--cream-dim);font-size:0.85rem;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.06);}
+  .nav-dropdown li:last-child{border-bottom:none;}
+  .nav-dropdown li strong{color:var(--cream);font-weight:600;}
+  .nav-cta{
+    background:var(--gold);color:var(--ink);font-weight:700;
+    padding:10px 20px;border-radius:100px;font-size:0.88rem;
+    transition:background .2s ease;margin-left:10px;
+  }
+  .nav-cta:hover{background:var(--gold-light);}
+  .nav-toggle{display:none;background:none;border:none;color:var(--cream);font-size:1.5rem;cursor:pointer;}
+  @media (max-width:900px){
+    .nav-links{
+      position:fixed;top:60px;left:0;right:0;bottom:0;overflow-y:auto;
+      background:var(--ink);flex-direction:column;align-items:stretch;
+      padding:16px 20px 40px;gap:4px;
+      transform:translateY(-150%);transition:transform .3s ease;
+      border-bottom:1px solid rgba(194,153,88,0.18);
+    }
+    .nav-links.open{transform:translateY(0);}
+    .nav-toggle{display:block;}
+    .nav-item{width:100%;}
+    .nav-trigger{justify-content:space-between;width:100%;}
+    .nav-dropdown{
+      position:static;transform:none;width:100%;opacity:1;pointer-events:auto;
+      max-height:0;padding:0 12px;overflow:hidden;box-shadow:none;border:none;
+      transition:max-height .25s ease, padding .25s ease;
+    }
+    .nav-item.open .nav-dropdown{max-height:400px;padding:14px 12px 18px;}
+    .nav-cta{margin:14px 0 0;text-align:center;}
+  }
+
+  .eyebrow{
+    color:var(--gold-light);
+    font-size:0.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+    margin-bottom:18px;display:inline-block;
+  }
+
+  .cta-btn{
+    display:inline-flex;align-items:center;gap:10px;
+    background:var(--gold);
+    color:var(--ink);
+    font-weight:700;
+    padding:17px 30px;
+    border-radius:100px;
+    font-size:1rem;
+    box-shadow:0 8px 24px rgba(176,141,62,0.35);
+    transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+    border:none;cursor:pointer;
+  }
+  .cta-btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(176,141,62,0.5);background:var(--gold-light);}
+  .cta-btn svg{width:20px;height:20px;}
+  .seal{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:0.82rem;color:var(--cream-dim);margin-top:20px;
+  }
+  .seal .dot{width:6px;height:6px;border-radius:50%;background:var(--gold-light);}
+
+  /* HERO */
+  .hero{
+    background:radial-gradient(120% 100% at 15% 0%, var(--petrol) 0%, var(--navy) 55%, var(--ink) 100%);
+    color:var(--cream);
+    padding:120px 0 90px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero-content{max-width:720px;position:relative;z-index:1;}
+  .hero h1{
+    font-size:clamp(2.4rem,6vw,4.2rem);
+    font-weight:700;
+    line-height:1.02;
+    margin-bottom:24px;
+  }
+  .hero h1 em{
+    font-style:normal;color:var(--gold-light);
+  }
+  .hero p.sub{
+    font-size:1.15rem;
+    max-width:560px;
+    color:var(--cream-dim);
+    margin-bottom:38px;
+  }
+  .stats-row{
+    display:flex;gap:0;flex-wrap:wrap;
+    border-top:1px solid rgba(237,230,214,0.18);
+    margin-top:44px;padding-top:28px;
+  }
+  .stat{flex:1;min-width:150px;padding-right:24px;}
+  .stat .num{font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:700;color:var(--gold-light);}
+  .stat .label{font-size:0.82rem;color:var(--cream-dim);margin-top:4px;}
+
+  .section-head{max-width:640px;margin-bottom:48px;}
+  .section-head .eyebrow{color:var(--gold);}
+  .section-head h2{font-size:clamp(1.7rem,3.6vw,2.5rem);font-weight:700;color:var(--navy);}
+  .section-head p{color:var(--petrol);font-size:1.05rem;margin-top:14px;}
+
+  .problema{padding:100px 0 90px;background:var(--cream);}
+  .problema-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
+  .problema-grid p{font-size:1.15rem;color:var(--petrol);line-height:1.75;}
+  .problema-grid .highlight{color:var(--navy);font-weight:700;}
+  @media (max-width:800px){.problema-grid{grid-template-columns:1fr;gap:28px;}}
+
+  .tipos{background:var(--navy);color:var(--cream);padding:100px 0;}
+  .tipos .section-head h2, .tipos .section-head .eyebrow{color:var(--cream);}
+  .tipos .section-head .eyebrow{color:var(--gold-light);}
+  .cards-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+    background:rgba(237,230,214,0.15);
+    border:1px solid rgba(237,230,214,0.15);
+    border-radius:16px;overflow:hidden;
+  }
+  .card{background:var(--navy);padding:32px 24px;transition:background .25s ease;}
+  .card:hover{background:var(--petrol);}
+  .card .icon{width:34px;height:34px;margin-bottom:18px;color:var(--gold-light);}
+  .card h3{font-size:1.05rem;font-weight:600;color:var(--cream);margin-bottom:6px;}
+  .card p{font-size:0.85rem;color:var(--cream-dim);}
+  @media (max-width:900px){.cards-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:520px){.cards-grid{grid-template-columns:1fr;}}
+
+  .paraquem{background:var(--petrol);color:var(--cream);padding:80px 0;}
+  .paraquem-inner{display:flex;gap:40px;align-items:center;flex-wrap:wrap;}
+  .paraquem-badge{
+    background:var(--gold);color:var(--ink);font-weight:700;
+    padding:10px 22px;border-radius:100px;font-size:0.95rem;white-space:nowrap;
+  }
+  .paraquem p{font-size:1.15rem;max-width:600px;color:var(--cream-dim);}
+
+  .diferenciais{padding:100px 0;background:var(--cream);}
+  .dif-list{display:grid;grid-template-columns:1fr 1fr;gap:36px;}
+  .dif-item{display:flex;gap:18px;}
+  .dif-item .num{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.1rem;color:var(--gold);flex-shrink:0;}
+  .dif-item h3{font-size:1.1rem;font-weight:700;margin-bottom:6px;color:var(--navy);}
+  .dif-item p{color:var(--petrol);font-size:0.95rem;}
+  @media (max-width:700px){.dif-list{grid-template-columns:1fr;}}
+
+  .sobre{background:var(--navy);color:var(--cream);padding:100px 0;}
+  .sobre-grid{display:block;max-width:640px;}
+  .sobre-text .eyebrow{color:var(--gold-light);}
+  .sobre-text h2{font-size:2rem;font-weight:700;margin-bottom:6px;}
+  .sobre-name{font-size:1rem;color:var(--gold-light);margin-bottom:22px;font-weight:600;}
+  .sobre-text p{color:var(--cream-dim);font-size:1.02rem;margin-bottom:14px;}
+  .sobre-text a.insta{
+    display:inline-flex;align-items:center;gap:8px;color:var(--gold-light);
+    font-weight:700;margin-top:10px;border-bottom:1px solid var(--gold-light);padding-bottom:2px;
+  }
+
+  .prova{padding:100px 0;background:var(--cream);}
+  .selos-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:50px;}
+  .selo{
+    background:var(--navy);color:var(--cream);
+    padding:10px 18px;border-radius:100px;font-size:0.85rem;font-weight:600;
+    display:flex;align-items:center;gap:8px;
+  }
+  .selo svg{width:14px;height:14px;color:var(--gold-light);}
+  .casos{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:36px;}
+  .caso-card{background:#fff;border:1px solid var(--cream-dim);border-radius:16px;padding:30px;}
+  .caso-card .tag{font-size:0.75rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;display:block;}
+  .caso-card p{color:var(--petrol);font-size:0.98rem;}
+  @media (max-width:700px){.casos{grid-template-columns:1fr;}}
+
+  .depoimentos-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-bottom:18px;}
+  .depoimento-card{
+    background:var(--navy);color:var(--cream);border-radius:16px;padding:26px 24px;
+    display:flex;flex-direction:column;justify-content:space-between;min-height:170px;
+  }
+  .depoimento-card .quote-mark{color:var(--gold-light);font-size:1.8rem;font-family:'Space Grotesk',sans-serif;line-height:1;margin-bottom:6px;}
+  .depoimento-card p{font-size:0.95rem;color:var(--cream-dim);flex-grow:1;}
+  .depoimento-card .autor{margin-top:16px;font-size:0.85rem;font-weight:700;color:var(--gold-light);}
+  .exemplo-tag{
+    display:inline-block;font-size:0.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--gold);background:rgba(176,141,62,0.12);border:1px solid var(--gold);
+    padding:4px 10px;border-radius:100px;margin-bottom:20px;
+  }
+  .rating-badge{
+    display:inline-flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--cream-dim);
+    border-radius:100px;padding:10px 20px;font-weight:700;color:var(--navy);
+  }
+  .rating-badge .stars{color:var(--gold);letter-spacing:2px;}
+  @media (max-width:800px){.depoimentos-grid{grid-template-columns:1fr;}}
+
+  .oferta{background:linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);padding:90px 0;color:var(--ink);}
+  .oferta-inner{display:grid;grid-template-columns:1.1fr 0.9fr;gap:50px;align-items:center;}
+  .oferta h2{font-size:clamp(1.7rem,3.4vw,2.3rem);font-weight:700;margin-bottom:18px;}
+  .oferta ul{list-style:none;margin:22px 0;}
+  .oferta li{padding-left:26px;position:relative;margin-bottom:12px;font-weight:600;}
+  .oferta li::before{content:"✓";position:absolute;left:0;font-weight:800;}
+  .oferta-box{background:var(--navy);color:var(--cream);border-radius:20px;padding:36px;text-align:center;}
+  .oferta-box .cta-btn{background:var(--cream);color:var(--navy);width:100%;justify-content:center;margin-top:18px;}
+  .oferta-box .cta-btn:hover{background:#fff;}
+  .oferta-box .small{font-size:0.85rem;color:var(--cream-dim);margin-top:14px;}
+  @media (max-width:800px){.oferta-inner{grid-template-columns:1fr;}}
+
+  .cta-final{
+    background:radial-gradient(120% 120% at 85% 20%, var(--petrol) 0%, var(--navy) 60%, var(--ink) 100%);
+    color:var(--cream);padding:100px 0 60px;text-align:center;
+  }
+  .cta-final h2{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:700;margin-bottom:20px;max-width:600px;margin-left:auto;margin-right:auto;}
+  .cta-final .cta-btn{margin-top:10px;}
+  footer{
+    border-top:1px solid rgba(237,230,214,0.15);
+    margin-top:70px;padding:30px 0;
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;
+    font-size:0.85rem;color:var(--cream-dim);
+  }
+  footer .foot-links{display:flex;gap:20px;}
+  footer a:hover{color:var(--gold-light);}
+  .brand-badge{display:flex;align-items:center;gap:8px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:0.9rem;}
+  .brand-badge img{height:26px;width:auto;}
+
+  .float-wa{
+    position:fixed;bottom:24px;right:24px;z-index:999;
+    background:#1FBF5B;color:#fff;width:60px;height:60px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 24px rgba(0,0,0,0.28);
+    transition:transform .25s ease;
+  }
+  .float-wa:hover{transform:scale(1.08);}
+  .float-wa svg{width:30px;height:30px;}
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal{transition:none;opacity:1;transform:none;}
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a class="nav-logo-link" href="#sobre" aria-label="Ir para Sobre a Carreira Seguros">
+      <span class="nav-logo-ring"></span>
+      <img class="nav-logo" src="logo.png" alt="Carreira Seguros">
+      <span class="nav-logo-hint">Saiba mais ↓</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">☰</button>
+    <div class="nav-links" id="navLinks">
+      <div class="nav-item">
+        <a href="#problema" class="nav-trigger">O problema <span class="caret">▾</span></a>
+        <div class="nav-dropdown">
+          <h4>O problema</h4>
+          <p>Comparar seguradora sozinho custa caro — de dinheiro e de tempo. Sem comparar, é fácil pagar mais caro ou descobrir tarde demais que faltou cobertura.</p>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="#tipos" class="nav-trigger">Seguros <span class="caret">▾</span></a>
+        <div class="nav-dropdown">
+          <h4>Tipos de seguro</h4>
+          <ul>
+            <li>Automóvel</li>
+            <li>Residencial</li>
+            <li>Vida</li>
+            <li>Saúde <strong>(com odontológico, via Trindade)</strong></li>
+            <li>Empresarial</li>
+            <li>Viagem</li>
+            <li>Consórcio <strong>(via Porto Seguro)</strong></li>
+            <li>Sob medida</li>
+          </ul>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="#diferenciais" class="nav-trigger">Diferenciais <span class="caret">▾</span></a>
+        <div class="nav-dropdown">
+          <h4>Por que a Carreira</h4>
+          <ul>
+            <li>Pós-venda com bastante suporte</li>
+            <li>Corretora Elite Porto Seguro</li>
+            <li>Cotação comparando parceiras, sem custo</li>
+            <li>Sempre buscando algo novo pros clientes</li>
+          </ul>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="#sobre" class="nav-trigger">Sobre <span class="caret">▾</span></a>
+        <div class="nav-dropdown">
+          <h4>Elisangela Carreira</h4>
+          <p>2 anos de atuação, formação técnica pela ENS — Escola Nacional de Seguros — e formação complementar em Administração. Mais de 50 clientes atendidos.</p>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="#prova" class="nav-trigger">Depoimentos <span class="caret">▾</span></a>
+        <div class="nav-dropdown">
+          <h4>Quem confiou na Carreira</h4>
+          <ul>
+            <li>Corretora Elite Porto Seguro</li>
+            <li>1º lugar melhor corretora de Guarulhos · 2026</li>
+            <li>2º lugar · 2025</li>
+            <li>4 depoimentos reais de clientes</li>
+          </ul>
+        </div>
+      </div>
+      <a class="nav-cta" href="https://wa.me/5511943777246" target="_blank" rel="noopener">Pedir cotação</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <div class="wrap hero-content reveal">
+    <span class="eyebrow">Corretora de seguros · Guarulhos, SP</span>
+    <h1>Seguro certo,<br><em>sem enrolação.</em></h1>
+    <p class="sub">Comparamos as seguradoras parceiras — Porto Seguro, Bradesco, Amil e Trindade — pra achar a cobertura ideal pro seu negócio. E continuamos com você depois da contratação.</p>
+    <a class="cta-btn" href="https://wa.me/5511943777246" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m0 1.67c2.2 0 4.27.86 5.82 2.41a8.2 8.2 0 0 1 2.42 5.83c0 4.55-3.7 8.24-8.25 8.24a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.25-4.38c0-4.55 3.7-8.24 8.24-8.24M8.53 6.85c-.16 0-.43.06-.66.31s-.87.85-.87 2.07.89 2.4 1.02 2.57c.12.16 1.75 2.78 4.38 3.83 2.18.87 2.62.7 3.1.65.47-.04 1.51-.62 1.72-1.22.21-.6.21-1.11.15-1.22-.06-.1-.23-.16-.47-.28-.25-.12-1.45-.71-1.68-.79-.22-.08-.39-.12-.55.13-.16.24-.63.79-.77.95-.14.16-.28.18-.53.06-.25-.13-1.04-.38-1.99-1.22-.73-.65-1.23-1.46-1.37-1.7-.14-.25-.02-.38.11-.51.11-.11.25-.28.37-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.43-.06-.12-.55-1.36-.76-1.86-.2-.48-.4-.42-.55-.42h-.47"/></svg>
+      Pedir cotação no WhatsApp
+    </a>
+    <div class="seal"><span class="dot"></span> Cotação sem custo · Resposta rápida</div>
+
+    <div class="stats-row">
+      <div class="stat"><div class="num">2 anos</div><div class="label">De atuação</div></div>
+      <div class="stat"><div class="num">50+</div><div class="label">Clientes atendidos</div></div>
+      <div class="stat"><div class="num">1º lugar</div><div class="label">Melhor corretora de Guarulhos, 2026</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- ===== PROBLEMA ===== -->
+<section class="problema" id="problema">
+  <div class="wrap">
+    <div class="problema-grid">
+      <div class="section-head reveal" style="margin-bottom:0;">
+        <span class="eyebrow">O problema</span>
+        <h2>Comparar seguradora sozinho custa caro — de dinheiro e de tempo.</h2>
+      </div>
+      <p class="reveal">Quem procura <span class="highlight">consórcio</span>, <span class="highlight">plano de saúde</span> ou <span class="highlight">seguro auto</span> sem comparar as opções corre o risco de pagar mais caro, ou só descobrir a cobertura que faltou na hora do sinistro. A Carreira Seguros compara as seguradoras parceiras por você e dá suporte em cada etapa — inclusive depois de fechar contrato.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TIPOS DE SEGURO ===== -->
+<section class="tipos" id="tipos">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">O que cobrimos</span>
+      <h2>Tipos de seguro oferecidos</h2>
+    </div>
+    <div class="cards-grid reveal">
+      <div class="card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12l2-6h14l2 6M5 12v6h14v-6M5 12h14"/><circle cx="7.5" cy="18" r="1.3"/><circle cx="16.5" cy="18" r="1.3"/></svg></div><h3>Automóvel</h3></div>
+      <div class="card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 11l9-7 9 7M5 10v10h14V10"/></svg></div><h3>Residencial</h3></div>
+      <div class="card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-4.5-9.5-9C.9 8.5 2 5 5.5 5c2 0 3.4 1.2 4.5 2.6C11.1 6.2 12.5 5 14.5 5 18 5 19.1 8.5 17.5 12c-2.5 4.5-5.5 9-5.5 9"/></svg></div><h3>Vida</h3></div>
+      <div class="card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v6M12 15v6M3 12h6M15 12h6"/><circle cx="12" cy="12" r="9"/></svg></div><h3>Saúde</h3><p>com odontológico, via Trindade</p></div>
+      <div class="card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="7" width="16" height="13" rx="1.5"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></div><h3>Empresarial</h3></div>
+      <div class="card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12h18M12 3c2.5 3 4 6 4 9s-1.5 6-4 9c-2.5-3-4-6-4-9s1.5-6 4-9z"/></svg></div><h3>Viagem</h3></div>
+      <div class="card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="6" width="18" height="13" rx="1.5"/><path d="M3 10h18M8 14h2"/></svg></div><h3>Consórcio</h3><p>via Porto Seguro</p></div>
+      <div class="card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l2.5 5.5L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-1.5z"/></svg></div><h3>Sob medida</h3><p>outro tipo de cobertura</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PARA QUEM ===== -->
+<section class="paraquem">
+  <div class="wrap paraquem-inner reveal">
+    <span class="paraquem-badge">Para empresas</span>
+    <p>Foco em atender empresas que precisam de cobertura confiável — do seguro empresarial ao plano de saúde da equipe — sem perder tempo comparando seguradora por conta própria.</p>
+  </div>
+</section>
+
+<!-- ===== DIFERENCIAIS ===== -->
+<section class="diferenciais" id="diferenciais">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Por que a Carreira</span>
+      <h2>Diferenciais</h2>
+    </div>
+    <div class="dif-list reveal">
+      <div class="dif-item">
+        <span class="num">01</span>
+        <div><h3>Pós-venda com bastante suporte</h3><p>Dúvidas, sinistro e renovação sempre com acompanhamento — o suporte não some depois da assinatura.</p></div>
+      </div>
+      <div class="dif-item">
+        <span class="num">02</span>
+        <div><h3>Corretora Elite Porto Seguro</h3><p>Reconhecimento direto da Porto Seguro pelo nível de atendimento.</p></div>
+      </div>
+      <div class="dif-item">
+        <span class="num">03</span>
+        <div><h3>Cotação comparando parceiras</h3><p>Comparação entre seguradoras parceiras, sem custo, pra achar o melhor custo-benefício.</p></div>
+      </div>
+      <div class="dif-item">
+        <span class="num">04</span>
+        <div><h3>Sempre buscando algo novo</h3><p>De tempos em tempos, condições especiais aos clientes — como desconto em combustível.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SOBRE ===== -->
+<section class="sobre" id="sobre">
+  <div class="wrap sobre-grid reveal">
+    <div class="sobre-text">
+      <span class="eyebrow">Sobre a corretora</span>
+      <h2>Carreira Seguros</h2>
+      <div class="sobre-name">Elisangela Carreira</div>
+      <p>2 anos de atuação no mercado, com formação técnica pela ENS — Escola Nacional de Seguros — e formação complementar em Administração.</p>
+      <p>Mais de 50 clientes atendidos até aqui.</p>
+      <a class="insta" href="https://instagram.com/carreira_seguros" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+        @carreira_seguros
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROVA SOCIAL ===== -->
+<section class="prova" id="prova">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Prova social</span>
+      <h2>Quem confiou na Carreira Seguros</h2>
+    </div>
+
+    <div class="selos-row reveal">
+      <span class="selo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.6 6.2L21 9l-4.7 4.3L17.5 20 12 16.6 6.5 20l1.2-6.7L3 9l6.4-.8z"/></svg> Corretora Elite Porto Seguro</span>
+      <span class="selo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.6 6.2L21 9l-4.7 4.3L17.5 20 12 16.6 6.5 20l1.2-6.7L3 9l6.4-.8z"/></svg> 1º lugar melhor corretora de Guarulhos · 2026</span>
+      <span class="selo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.6 6.2L21 9l-4.7 4.3L17.5 20 12 16.6 6.5 20l1.2-6.7L3 9l6.4-.8z"/></svg> 2º lugar · 2025</span>
+    </div>
+
+    <div class="casos reveal">
+      <div class="caso-card">
+        <span class="tag">Caso de sucesso</span>
+        <p>No mês passado, o primeiro cliente foi contemplado no consórcio — mais um passo dado com o suporte da equipe do início ao fim.</p>
+      </div>
+      <div class="caso-card">
+        <span class="tag">Caso de sucesso</span>
+        <p>Famílias migraram para novos planos de saúde com acompanhamento completo da Carreira Seguros durante todo o processo.</p>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <div class="depoimentos-grid">
+        <div class="depoimento-card">
+          <div>
+            <span class="quote-mark">"</span>
+            <p>Gostaria de agradecer pelo atendimento no consórcio. Eu tinha muitas dúvidas e até um certo receio de contratar, mas vocês explicaram cada etapa com muita clareza. Agora estou muito tranquilo e feliz por ter dado esse passo. Muito obrigado pela atenção e profissionalismo.</p>
+          </div>
+          <div class="autor">Cliente Carreira Seguros — Consórcio</div>
+        </div>
+        <div class="depoimento-card">
+          <div>
+            <span class="quote-mark">"</span>
+            <p>Elisangela, boa tarde! Gostaria de agradecer pelo atendimento impecável. Desde o primeiro contato percebi o comprometimento em encontrar a melhor opção para mim. Além do preço justo, você transmitiu muita confiança durante todo o processo. Com certeza voltarei a fazer negócio e indicarei seu trabalho para outras pessoas.</p>
+          </div>
+          <div class="autor">Cliente Carreira Seguros</div>
+        </div>
+        <div class="depoimento-card">
+          <div>
+            <span class="quote-mark">"</span>
+            <p>Boa noite! Recebi toda a documentação e está tudo certinho. Muito obrigado pelo atendimento impecável. Gostei muito da forma como vocês conduziram tudo, sem pressão e sempre pensando no que era melhor para mim. Foi uma experiência excelente e com certeza voltarei a fazer negócio.</p>
+          </div>
+          <div class="autor">Cliente Carreira Seguros</div>
+        </div>
+        <div class="depoimento-card">
+          <div>
+            <span class="quote-mark">"</span>
+            <p>Olá! Queria deixar meu agradecimento pelo atendimento. Faz tempo que eu procurava uma empresa de confiança para cuidar do meu seguro e fiquei muito feliz com a experiência. Sempre fui atendido com rapidez, educação e muita atenção. Com certeza essa será a primeira opção quando eu precisar renovar ou contratar outro serviço. Muito sucesso para vocês! 👏</p>
+          </div>
+          <div class="autor">Cliente Carreira Seguros</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:24px;" class="reveal">
+      <span class="exemplo-tag">Exemplo · atualizar com nota real do Google</span><br>
+      <span class="rating-badge"><span class="stars">★★★★★</span> 4,8/5 · 30+ avaliações no Google</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== OFERTA ===== -->
+<section class="oferta">
+  <div class="wrap oferta-inner reveal">
+    <div>
+      <h2>Cotação 100% personalizada, sem custo</h2>
+      <p>Comparamos entre Porto Seguro, Bradesco, Amil e Trindade — cada uma usada na linha em que é mais competitiva.</p>
+      <ul>
+        <li>Porto Seguro para consórcio</li>
+        <li>Trindade para saúde e odontológico</li>
+        <li>Comparação sem custo entre as parceiras</li>
+        <li>Suporte antes, durante e depois da contratação</li>
+      </ul>
+      <div style="margin-top:18px;background:rgba(14,47,60,0.08);border-radius:14px;padding:18px 20px;">
+        <strong>Bônus do momento:</strong> desconto especial em combustível para novos contratos de seguro automóvel.<br>
+        <span style="font-size:0.92rem;">Todo mês tem uma novidade diferente — a Carreira Seguros está sempre buscando algo novo pra oferecer aos clientes.</span>
+      </div>
+    </div>
+    <div class="oferta-box">
+      <h3 style="font-family:'Space Grotesk',sans-serif;font-size:1.3rem;">Pedir cotação agora</h3>
+      <p class="small">Resposta rápida direto no WhatsApp</p>
+      <a class="cta-btn" href="https://wa.me/5511943777246" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m0 1.67c2.2 0 4.27.86 5.82 2.41a8.2 8.2 0 0 1 2.42 5.83c0 4.55-3.7 8.24-8.25 8.24a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.25-4.38c0-4.55 3.7-8.24 8.24-8.24M8.53 6.85c-.16 0-.43.06-.66.31s-.87.85-.87 2.07.89 2.4 1.02 2.57c.12.16 1.75 2.78 4.38 3.83 2.18.87 2.62.7 3.1.65.47-.04 1.51-.62 1.72-1.22.21-.6.21-1.11.15-1.22-.06-.1-.23-.16-.47-.28-.25-.12-1.45-.71-1.68-.79-.22-.08-.39-.12-.55.13-.16.24-.63.79-.77.95-.14.16-.28.18-.53.06-.25-.13-1.04-.38-1.99-1.22-.73-.65-1.23-1.46-1.37-1.7-.14-.25-.02-.38.11-.51.11-.11.25-.28.37-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.43-.06-.12-.55-1.36-.76-1.86-.2-.48-.4-.42-.55-.42h-.47"/></svg>
+        Pedir cotação agora
+      </a>
+      <div class="small">Cotação sem custo · Resposta rápida</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA FINAL + FOOTER ===== -->
+<section class="cta-final">
+  <div class="wrap reveal">
+    <h2>Encontre o seguro certo sem enrolação.</h2>
+    <a class="cta-btn" href="https://wa.me/5511943777246" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m0 1.67c2.2 0 4.27.86 5.82 2.41a8.2 8.2 0 0 1 2.42 5.83c0 4.55-3.7 8.24-8.25 8.24a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.25-4.38c0-4.55 3.7-8.24 8.24-8.24M8.53 6.85c-.16 0-.43.06-.66.31s-.87.85-.87 2.07.89 2.4 1.02 2.57c.12.16 1.75 2.78 4.38 3.83 2.18.87 2.62.7 3.1.65.47-.04 1.51-.62 1.72-1.22.21-.6.21-1.11.15-1.22-.06-.1-.23-.16-.47-.28-.25-.12-1.45-.71-1.68-.79-.22-.08-.39-.12-.55.13-.16.24-.63.79-.77.95-.14.16-.28.18-.53.06-.25-.13-1.04-.38-1.99-1.22-.73-.65-1.23-1.46-1.37-1.7-.14-.25-.02-.38.11-.51.11-.11.25-.28.37-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.43-.06-.12-.55-1.36-.76-1.86-.2-.48-.4-.42-.55-.42h-.47"/></svg>
+      Pedir cotação no WhatsApp
+    </a>
+
+    <footer>
+      <div class="brand-badge"><img src="logo.png" alt="Carreira Seguros"><span>© 2026 · Guarulhos, SP</span></div>
+      <div class="foot-links">
+        <a href="https://wa.me/5511943777246" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="https://instagram.com/carreira_seguros" target="_blank" rel="noopener">@carreira_seguros</a>
+      </div>
+    </footer>
+  </div>
+</section>
+
+<!-- Floating WhatsApp -->
+<a class="float-wa" href="https://wa.me/5511943777246" target="_blank" rel="noopener" aria-label="Pedir cotação no WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m0 1.67c2.2 0 4.27.86 5.82 2.41a8.2 8.2 0 0 1 2.42 5.83c0 4.55-3.7 8.24-8.25 8.24a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.25-4.38c0-4.55 3.7-8.24 8.24-8.24M8.53 6.85c-.16 0-.43.06-.66.31s-.87.85-.87 2.07.89 2.4 1.02 2.57c.12.16 1.75 2.78 4.38 3.83 2.18.87 2.62.7 3.1.65.47-.04 1.51-.62 1.72-1.22.21-.6.21-1.11.15-1.22-.06-.1-.23-.16-.47-.28-.25-.12-1.45-.71-1.68-.79-.22-.08-.39-.12-.55.13-.16.24-.63.79-.77.95-.14.16-.28.18-.53.06-.25-.13-1.04-.38-1.99-1.22-.73-.65-1.23-1.46-1.37-1.7-.14-.25-.02-.38.11-.51.11-.11.25-.28.37-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.43-.06-.12-.55-1.36-.76-1.86-.2-.48-.4-.42-.55-.42h-.47"/></svg>
+</a>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{threshold:0.15});
+  revealEls.forEach(el=>io.observe(el));
+
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', ()=>{
+    navLinks.classList.toggle('open');
+  });
+
+  document.querySelectorAll('.nav-item').forEach(item=>{
+    const trigger = item.querySelector('.nav-trigger');
+    trigger.addEventListener('click', (e)=>{
+      if (window.innerWidth <= 900){
+        e.preventDefault();
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.nav-item.open').forEach(o=> o.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      } else {
+        navLinks.classList.remove('open');
+      }
+    });
+  });
+
+  document.querySelector('.nav-cta').addEventListener('click', ()=> navLinks.classList.remove('open'));
+</script>
+</body>
+</html>
