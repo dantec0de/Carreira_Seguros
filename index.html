@@ -66,12 +66,16 @@
     backdrop-filter:blur(10px);
     border-bottom:1px solid rgba(194,153,88,0.18);
   }
+  /* .navbar-inner usa a MESMA classe .wrap do hero (max-width:1120px, padding
+     lateral 28px) — assim a navbar fica sempre alinhada com o conteúdo da
+     página por definição, sem depender de valores duplicados/soltos.
+     Aqui só sobrescrevemos o padding vertical (top/bottom), que o .wrap não define. */
   .navbar-inner{
-    max-width:1120px;margin:0 auto;padding:16px 28px;
     display:flex;align-items:center;gap:20px;
+    padding-top:16px;padding-bottom:16px;
   }
   @media (max-width:480px){
-    .navbar-inner{padding:12px 20px;gap:12px;}
+    .navbar-inner{padding-top:12px;padding-bottom:12px;gap:12px;}
   }
   /* Logo + tagline, top-left, clickable */
   .nav-brand-group{display:flex;align-items:center;gap:12px;flex-shrink:0;}
@@ -419,7 +423,7 @@
 
 <!-- ===== NAVBAR ===== -->
 <nav class="navbar">
-  <div class="navbar-inner">
+  <div class="navbar-inner wrap">
     <div class="nav-brand-group">
       <a class="nav-logo-link" href="#sobre" aria-label="Ir para Sobre a Carreira Seguros">
         <img class="nav-logo" src="logo.png" alt="Carreira Seguros" loading="eager">
