@@ -60,12 +60,19 @@
   .missing::before{content:"⚠ FALTA: ";color:var(--gold-light);}
 
   /* NAVBAR */
+  /* O blur fica num pseudo-elemento: backdrop-filter direto no .navbar cria um
+     containing block e prende o menu lateral (position:fixed) dentro da navbar. */
   .navbar{
     position:fixed;top:0;left:0;right:0;z-index:900;
-    background:rgba(11,10,32,0.85);
-    backdrop-filter:blur(10px);
     border-bottom:1px solid rgba(194,153,88,0.18);
   }
+  .navbar::before{
+    content:"";position:absolute;inset:0;z-index:-1;
+    background:rgba(11,10,32,0.85);
+    -webkit-backdrop-filter:blur(10px);
+    backdrop-filter:blur(10px);
+  }
+  section[id]{scroll-margin-top:var(--navbar-h);}
   /* .navbar-inner usa a MESMA classe .wrap do hero (max-width:1120px, padding
      lateral 28px) — assim a navbar fica sempre alinhada com o conteúdo da
      página por definição, sem depender de valores duplicados/soltos.
@@ -141,28 +148,40 @@
   }
   .nav-cta:hover{background:var(--gold-light);}
   .nav-toggle{
-    order:4;display:block;background:none;border:none;color:var(--cream);
-    font-size:1.4rem;cursor:pointer;padding:4px 2px;
+    order:4;display:flex;align-items:center;justify-content:center;
+    width:42px;height:42px;flex-shrink:0;
+    background:rgba(194,153,88,0.08);
+    border:1px solid rgba(194,153,88,0.35);border-radius:10px;
+    color:var(--gold-light);
+    font-size:1.25rem;line-height:1;cursor:pointer;padding:0;
     position:relative;z-index:2;
+    transition:background .2s ease;
   }
+  .nav-toggle:active{background:rgba(194,153,88,0.2);}
 
   /* Botão de fechar (X), visível só dentro do menu lateral mobile */
   .nav-close{
     display:none;
-    position:absolute;top:14px;right:14px;
-    background:none;border:none;color:var(--cream);
-    font-size:1.7rem;line-height:1;cursor:pointer;padding:6px 10px;
-    border-radius:8px;transition:background .2s ease;
+    position:absolute;top:18px;right:16px;
+    width:40px;height:40px;
+    background:rgba(194,153,88,0.08);
+    border:1px solid rgba(194,153,88,0.3);border-radius:10px;
+    color:var(--gold-light);
+    font-size:1.5rem;line-height:1;cursor:pointer;padding:0;
+    transition:background .2s ease;
   }
-  .nav-close:hover{background:rgba(194,153,88,0.12);}
+  .nav-close:hover,.nav-close:active{background:rgba(194,153,88,0.2);}
+  .nav-menu-title{display:none;}
 
-  /* Overlay escurecido atrás do menu lateral */
+  /* Overlay escurecido atrás do menu lateral.
+     Fica ABAIXO da navbar (z 900) — o menu lateral vive dentro dela (z 1000),
+     então o overlay nunca cobre o menu nem intercepta os toques nos links. */
   .nav-overlay{
     position:fixed;inset:0;
-    background:rgba(0,0,0,0.55);
+    background:rgba(0,0,0,0.6);
     opacity:0;visibility:hidden;
     transition:opacity .3s ease, visibility 0s linear .3s;
-    z-index:950;
+    z-index:899;
   }
   .nav-overlay.active{
     opacity:1;visibility:visible;
@@ -176,35 +195,46 @@
      - sobrepõe o conteúdo (não empurra o layout) */
   .nav-links{
     order:2;
-    position:fixed;top:0;left:0;bottom:0;
-    width:300px;max-width:82vw;height:100vh;
-    padding:calc(var(--navbar-h) + 8px) 22px 32px;
+    position:fixed;top:0;left:0;
+    width:300px;max-width:84vw;height:100vh;height:100dvh;
+    padding:88px 18px 32px;
     overflow-y:auto;
     -webkit-overflow-scrolling:touch;
-    background:var(--ink);
-    display:flex;flex-direction:column;align-items:flex-start;
+    background:linear-gradient(180deg, var(--petrol) 0%, var(--ink) 100%);
+    display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;
     text-align:left;
-    gap:4px;
-    border-right:1px solid rgba(194,153,88,0.18);
-    box-shadow:12px 0 40px rgba(0,0,0,0.45);
+    gap:0;
+    border-right:1px solid rgba(194,153,88,0.22);
+    box-shadow:12px 0 40px rgba(0,0,0,0.5);
     transform:translateX(-100%);
-    transition:transform .3s ease;
+    visibility:hidden;
+    transition:transform .3s ease, visibility 0s linear .3s;
     z-index:1000;
   }
-  .nav-links.open{transform:translateX(0);}
-  .nav-close{display:block;}
+  .nav-links.open{transform:translateX(0);visibility:visible;transition:transform .3s ease;}
+  .nav-close{display:flex;align-items:center;justify-content:center;}
+  .nav-menu-title{
+    display:block;position:absolute;top:28px;left:22px;
+    font-family:'Space Grotesk',sans-serif;font-size:0.75rem;font-weight:700;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--gold);
+  }
   .nav-item{
     width:100%;
-    display:flex;flex-direction:column;align-items:flex-start;
+    display:block;
+    border-bottom:1px solid rgba(194,153,88,0.12);
   }
-  .nav-trigger{width:100%;justify-content:flex-start;text-align:left;}
-  .nav-dropdown{
-    position:static;transform:none;width:100%;opacity:1;pointer-events:auto;
-    max-height:0;padding:0 12px;overflow:hidden;box-shadow:none;border:none;
-    transition:max-height .25s ease, padding .25s ease;
+  .nav-item:first-of-type{border-top:1px solid rgba(194,153,88,0.12);}
+  .nav-trigger{
+    width:100%;justify-content:space-between;text-align:left;
+    padding:16px 8px;border-radius:0;
+    color:var(--cream);font-size:1.05rem;font-weight:600;
   }
-  /* Hover mostra a mesma prévia/tooltip que existe na navbar do desktop */
-  .nav-item:hover .nav-dropdown{max-height:400px;padding:14px 12px 18px;}
+  .nav-trigger::after{content:"→";color:var(--gold);font-size:1rem;transition:transform .2s ease;}
+  .nav-trigger:active{background:rgba(194,153,88,0.1);color:var(--gold-light);}
+  .nav-item:hover .nav-trigger{background:none;color:var(--cream);}
+  /* No mobile as prévias somem: :hover em tela de toque faz o 1º toque só
+     abrir a prévia e não navegar. */
+  .nav-dropdown{display:none;}
 
   @media (max-width:480px){
     .nav-cta{padding:8px 14px;font-size:0.78rem;}
@@ -225,9 +255,18 @@
       z-index:auto;
       transition:none;
     }
-    .nav-item{width:auto;display:block;}
-    .nav-trigger{justify-content:center;width:auto;flex:none;}
+    .nav-links{visibility:visible;}
+    .nav-menu-title{display:none;}
+    .nav-item, .nav-item:first-of-type{width:auto;display:block;border:none;}
+    .nav-trigger{
+      justify-content:center;width:auto;flex:none;
+      padding:10px 12px;border-radius:8px;
+      color:var(--cream-dim);font-size:0.92rem;
+    }
+    .nav-trigger::after{content:none;}
+    .nav-item:hover .nav-trigger, .nav-item.open .nav-trigger{color:var(--gold-light);background:rgba(194,153,88,0.08);}
     .nav-dropdown{
+      display:block;
       position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(-6px);
       width:270px;opacity:0;pointer-events:none;max-height:none;padding:18px 20px;
       box-shadow:0 20px 40px rgba(0,0,0,0.45);border:1px solid rgba(194,153,88,0.25);
@@ -455,6 +494,7 @@
       </a>
     </div>
     <div class="nav-links" id="navLinks">
+      <span class="nav-menu-title">Menu</span>
       <button type="button" class="nav-close" id="navClose" aria-label="Fechar menu">&times;</button>
       <div class="nav-item">
         <a href="#problema" class="nav-trigger">O problema</a>
@@ -824,9 +864,18 @@
   // Cada tópico do menu lateral usa a MESMA lógica da navbar:
   // hover mostra a prévia (CSS :hover no .nav-dropdown), clique navega
   // suavemente até a seção (scroll-behavior:smooth global) e fecha o menu.
-  document.querySelectorAll('.nav-trigger').forEach(link=>{
-    link.addEventListener('click', ()=>{
-      if (window.innerWidth <= 900) closeMenu();
+  // No mobile: fecha o menu e rola até a seção de forma explícita
+  // (o body estava com overflow:hidden enquanto o menu estava aberto).
+  document.querySelectorAll('.nav-links a[href^="#"], .nav-logo-link').forEach(link=>{
+    link.addEventListener('click', (e)=>{
+      const target = document.querySelector(link.getAttribute('href'));
+      if (!target) return;
+      e.preventDefault();
+      closeMenu();
+      requestAnimationFrame(()=>{
+        target.scrollIntoView({behavior:'smooth', block:'start'});
+        history.replaceState(null, '', link.getAttribute('href'));
+      });
     });
   });
 
